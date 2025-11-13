@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="fr" data-page="contact">
+<meta name="robots" content="noindex, nofollow">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact – Maître Marie Chareyron</title>
+  <meta name="description" content="Contacter le cabinet à Voiron. Adresse, téléphone, e-mail et carte Google Maps.">
+  <link rel="icon" href="assets/logo-mc.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand brand--header" href="index.html">
+        <img src="assets/logo-mc.svg" alt="Logo MC">
+        <span>Maître Marie Chareyron</span>
+      </a>
+      <nav class="menu">
+        <a href="index.html">Accueil</a>
+        <a href="famille.html">Droit de la famille</a>
+        <a href="travail.html">Droit du travail</a>
+        <a href="honoraires.html">Honoraires</a>
+        <a href="contact.html" class="btn btn-primary">Prendre RDV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section container">
+    <h2>Contact</h2>
+    <div class="grid-2">
+      <!-- ===== FORMULAIRE ===== -->
+      <form id="contact-form" class="card" action="https://formspree.io/f/xxxxxxxx" method="POST" novalidate>
+        <div class="grid-2">
+          <div class="input">
+            <label for="name">Nom Prénom*</label>
+            <input id="name" name="name" required>
+          </div>
+          <div class="input">
+            <label for="phone">Téléphone*</label>
+            <input id="phone" name="phone" type="tel"
+                  inputmode="numeric" placeholder="06 xx xx xx xx"
+                  required
+                  pattern="^(?:0[1-9](?: ?\d{2}){4}|\+33 ?[1-9](?: ?\d{2}){4})$"
+                  title="Format attendu : 06 12 34 56 78 ou +33 6 12 34 56 78">
+          </div>
+        </div>
+
+        <div class="input">
+          <label for="email" data-required="*">E-mail</label>
+          <input id="email"
+                type="email"
+                name="email"
+                placeholder="adresse@domaine.fr"
+                autocomplete="email"
+                required
+                pattern="^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$"
+                title="Entrez une adresse e-mail complète (ex. nom@domaine.fr)">
+        </div>
+
+        <!-- Sélecteur Objet -->
+        <div class="input">
+          <label for="subject">Objet*</label>
+          <select id="subject" name="subject" required>
+            <option value="" selected disabled>Choisir…</option>
+            <option>Divorce / séparation</option>
+            <option>Garde d’enfants / pension</option>
+            <option>Licenciement / rupture conventionnelle</option>
+            <option>Harcèlement au travail</option>
+            <option>Droit pénal / victime</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="input">
+          <label for="message">Message*</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <!-- RGPD -->
+        <div class="input rgpd">
+          <label for="consent">
+            <input id="consent" type="checkbox" name="rgpd_consent" required>
+            <span>
+              J’accepte que mes données soient traitées pour répondre à ma demande et j’ai lu la
+              <a href="mentions.html#confidentialite" target="_blank" rel="noopener" class="link">politique de confidentialité</a>.
+            </span>
+          </label>
+        </div>
+
+        <p class="required-note">* Champs obligatoires</p>
+        <button id="send-btn" class="btn btn-primary" type="submit">Envoyer</button>
+        <p class="lead">Ou écrivez-nous :
+          <a href="mailto:contact@cabinet-chareyron.fr">contact@cabinet-chareyron.fr</a>
+        </p>
+
+        <!-- Zone statut -->
+        <div id="form-status" aria-live="polite" style="margin-top:10px"></div>
+      </form>
+
+      <!-- ===== ASIDE ===== -->
+      <aside>
+        <div class="card">
+          <h3>Cabinet</h3>
+          <p>📍 97 boulevard Franklin Roosevelt, 38500 Voiron</p>
+          <p>☎️ 06 00 00 00 00</p>
+          <iframe class="map" style="width: 100%; height:430px;" title="Localisation du cabinet" loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.3980385427137!2d5.589681475949254!3d45.36622247107147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ae0b3c0a9b0df%3A0x8dbd8c1f474b9a29!2s97%20Bd%20Franklin%20Roosevelt%2C%2038500%20Voiron!5e0!3m2!1sfr!2sfr!4v1731345752000!5m2!1sfr!2sfr"></iframe>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+<footer>
+  <div class="container foot">
+    <div>
+      <strong>Cabinet de Maître Marie Chareyron</strong>
+      <p>Barreau de Grenoble • Voiron</p>
+      <p>© <span id="year"></span></p>
+    </div>
+
+    <div>
+      <a href="honoraires.html">Honoraires</a><br>
+      <a href="mentions-legales.html" target="_blank" rel="noopener">Mentions légales</a><br>
+      <a href="politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a>
+    </div>
+
+    <div>
+      <a href="contact.html">Contact</a><br>
+      <a href="mailto:contact@cabinet-chareyron.fr">contact@cabinet-chareyron.fr</a>
+    </div>
+  </div>
+</footer>
+
+
+
+  <script src="assets/scripts.js"></script>
+
+  <!-- JS statut d’envoi Formspree -->
+  <script>
+  (function () {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const btn = document.getElementById('send-btn');
+
+    function ok(msg){ status.className='alert success'; status.textContent=msg; }
+    function err(msg){ status.className='alert error'; status.textContent=msg; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!document.getElementById('consent').checked) {
+        err('Veuillez accepter la politique de confidentialité (RGPD).');
+        return;
+      }
+
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      ok('Envoi en cours…'); btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) { ok('✅ Merci, votre message a bien été envoyé.'); form.reset(); }
+        else {
+          const data = await res.json().catch(()=>({}));
+          err('❌ ' + (data?.errors?.[0]?.message || 'Erreur lors de l’envoi. Réessayez.'));
+        }
+      } catch {
+        err('❌ Erreur réseau. Merci de réessayer plus tard.');
+      } finally { btn.disabled = false; }
+    });
+  })();
+  </script>
+
+  <!-- Styles d’alerte minimalistes au cas où (peut rester ou passer dans styles.css) -->
+  <style>
+    .alert{margin-top:8px;padding:10px 12px;border-radius:10px;border:1px solid transparent;font-weight:600}
+    .alert.success{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+    .alert.error{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+  </style>
+</body>
+</html>
