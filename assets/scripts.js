@@ -1,6 +1,36 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
+// ===== Menu Toggle (Hamburger) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('site-menu');
+  
+  if (btn && menu) {
+    // Toggle menu on button click
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close menu when a link is clicked
+    menu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});
+
 // ===== Champ téléphone : FR & +33, formatage + limites =====
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('phone');
@@ -95,4 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
     email.addEventListener(evt, validateEmail)
   );
   validateEmail();
+});
+
+// === Partials loader (header + footer) ===
+async function loadPartial(selector, url) {
+  const host = document.querySelector(selector);
+  if (!host) return;
+  const res = await fetch(url, { cache: "no-cache" });
+  host.innerHTML = await res.text();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // Charge header & footer
+  await Promise.all([
+    loadPartial("#header-placeholder", "assets/header.html"),
+    loadPartial("#footer-placeholder", "assets/footer.html"),
+  ]);
+
+  // Active le bon onglet du menu selon l'attribut data-page sur <html>
+  const current = document.documentElement.getAttribute("data-page");
+  if (current) {
+    document
+      .querySelectorAll(`nav.menu a[data-page="${current}"]`)
+      .forEach(a => a.classList.add("active"));
+  }
+
+  // Année dynamique dans le footer
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
