@@ -1,35 +1,37 @@
+// ===== Menu Toggle (Hamburger) =====
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
 // ===== Menu Toggle (Hamburger) =====
-document.addEventListener('DOMContentLoaded', () => {
+function initMenuToggle() {
   const btn = document.querySelector('.menu-toggle');
   const menu = document.getElementById('site-menu');
   
-  if (btn && menu) {
-    // Toggle menu on button click
-    btn.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
+  if (!btn || !menu) return;
 
-    // Close menu when a link is clicked
-    menu.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') {
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-    });
+  // Toggle menu on button click
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
 
-    // Close menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-});
+  // Close menu when a link is clicked
+  menu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
 
 // ===== Champ téléphone : FR & +33, formatage + limites =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -141,6 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadPartial("#header-placeholder", "assets/header.html"),
     loadPartial("#footer-placeholder", "assets/footer.html"),
   ]);
+  initMenuToggle();
 
   // Active le bon onglet du menu selon l'attribut data-page sur <html>
   const current = document.documentElement.getAttribute("data-page");
@@ -154,3 +157,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   const yearSpan = document.getElementById("year");
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
+
+menu.classList.toggle("open");
