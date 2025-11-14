@@ -448,3 +448,35 @@ footer a {
   color: var(--gold);
   font-weight: 500;
 }
+
+
+/* ========================================== 
+   ========== CONTACT / HORAIRES ===========
+   ========================================== */
+
+/* Tableau d'horaires aligné en colonnes */
+.hours-table {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 12px 20px;
+  margin-top: 12px;
+  padding: 12px 0;
+}
+
+.day {
+  display: contents; /* chaque child span sera un cell dans la grid */
+}
+
+.day span:first-child {
+  text-align: left;
+  font-weight: 400;
+}
+
+.day span:last-child {
+  text-align: right;
+}
+
+/* Jour actuel de la semaine en gras */
+.day.current-day span:first-child {
+  font-weight: 700;
+}

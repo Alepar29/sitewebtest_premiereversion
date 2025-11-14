@@ -114,7 +114,27 @@
         <div id="footer-placeholder"></div>
         <script src="assets/scripts.js"></script>
 
-  <!-- JS statut d’envoi Formspree -->
+  <!-- JS pour mettre en gras le jour actuel dans les horaires -->
+  <script>
+  (function () {
+    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    const today = new Date().getDay();
+    const todayName = days[(today + 6) % 7]; // adjust: JS getDay() 0=Sunday, array 0=Monday
+    
+    const hoursTable = document.querySelector('.hours-table');
+    if (hoursTable) {
+      const dayElements = hoursTable.querySelectorAll('.day');
+      dayElements.forEach(dayEl => {
+        const dayText = dayEl.querySelector('span:first-child')?.textContent.trim();
+        if (dayText === todayName) {
+          dayEl.classList.add('current-day');
+        }
+      });
+    }
+  })();
+  </script>
+
+  <!-- JS statut d'envoi Formspree -->
   <script>
   (function () {
     const form = document.getElementById('contact-form');
