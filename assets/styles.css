@@ -56,12 +56,13 @@ button {
 }
 
 /* ============================================
-   Header / Navigation
+   HEADER - VERSION STABLE
 ============================================ */
+
 header {
   background: var(--brand);
   color: white;
-  padding: 20px 0;
+  padding: 10px 0;
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
@@ -74,16 +75,45 @@ header {
   align-items: center;
 }
 
+/* LOGO */
 .logo {
-  height: 60px;
+  height: 55px;
 }
 
-.menu-toggle,
-.burger {
+/* MENU BURGER */
+.menu-toggle {
   display: none;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: var(--gold);
+  padding: 0;
+  cursor: pointer;
 }
 
-/* Menu desktop */
+/* Lignes internes du burger */
+.menu-toggle::before,
+.menu-toggle::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 3px;
+  background: var(--brand);
+  margin: 6px auto;
+}
+
+/* BUTTON RDV */
+.btn-header {
+  background: var(--gold);
+  color: var(--brand); /* lisible */
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+/* MENU DESKTOP */
 nav.menu {
   display: flex;
   align-items: center;
@@ -93,23 +123,59 @@ nav.menu {
 nav.menu a {
   color: var(--gold);
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 nav.menu a.active {
   border-bottom: 2px solid var(--gold);
 }
 
-/* Boutons dans header */
-.btn-header {
-  background: var(--gold);
-  color: var(--brand);
-  padding: 10px 22px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  box-shadow: var(--shadow);
-}
+/* ============================================
+   NAVIGATION MOBILE
+============================================ */
+@media (max-width: 768px) {
 
+  .logo {
+    height: 42px; /* réduction version mobile */
+  }
+
+  .menu-toggle {
+    display: block !important;
+  }
+
+  /* Cacher le menu desktop */
+  nav.menu {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: var(--brand);
+    display: none;
+    flex-direction: column;
+    padding: 25px 0;
+    gap: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  nav.menu.open {
+    display: flex;
+  }
+
+  nav.menu a {
+    color: var(--gold);
+    font-size: 1.2rem;
+    padding: 10px 30px;
+  }
+
+  .btn-header {
+    width: calc(100% - 40px);
+    margin: 10px 20px 0;
+    text-align: center;
+    color: var(--brand); /* lisible */
+    background: var(--gold);
+    font-size: 1.2rem;
+  }
+}
 
 /* ============================================
    Sections génériques
@@ -245,68 +311,4 @@ form textarea {
   }
 }
 
-/* =============================================
-   🍔 NAVIGATION MOBILE (IMPORTANT)
-============================================ */
-@media (max-width: 768px) {
 
-  header {
-    padding: 15px 0;
-    position: relative;
-    z-index: 3000;
-  }
-
-  .menu-toggle,
-  .burger {
-    display: block !important;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    background: var(--gold);
-    border-radius: 8px;
-    border: none;
-    z-index: 3001;
-  }
-
-  /* Cacher menu desktop */
-  nav.menu {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: var(--brand);
-    padding: 20px 0;
-    gap: 15px;
-    text-align: left;
-    z-index: 2000;
-    border-top: 1px solid rgba(255,255,255,0.15);
-  }
-
-  nav.menu.open {
-    display: flex;
-  }
-
-  nav.menu a {
-    font-size: 1.2rem;
-    padding: 12px 25px;
-    display: block;
-    color: var(--gold);
-  }
-
-  /* Bouton RDV mobile */
-  .btn-header {
-    margin: 10px 20px;
-    width: calc(100% - 40px);
-  }
-
-  .logo {
-    height: 45px;
-  }
-
-  /* Réduire hero */
-  .hero {
-    padding: 40px 0 60px;
-  }
-}
