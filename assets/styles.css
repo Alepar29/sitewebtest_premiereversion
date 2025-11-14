@@ -1,6 +1,9 @@
-/* ============================================
-   Variables globales
-============================================ */
+/* ========================================== 
+   ================ HEADER ==================
+   ========================================== */
+
+/* ---------- Variables & reset ---------- */
+
 :root {
   --brand: #0a2342;     /* Bleu profond */
   --gold: #d4af37;      /* Doré */
@@ -8,9 +11,6 @@
   --shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* ============================================
-   Reset minimal
-============================================ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -36,12 +36,11 @@ a {
 
 button {
   cursor: pointer;
+  font-family: inherit;
 }
 
+/* ---------- Layout de base ---------- */
 
-/* ============================================
-   Layout global
-============================================ */
 .container {
   width: 100%;
   max-width: 1100px;
@@ -55,9 +54,7 @@ button {
   gap: 1rem;
 }
 
-/* ============================================
-   HEADER - VERSION STABLE
-============================================ */
+/* ---------- Header global ---------- */
 
 header {
   background: var(--brand);
@@ -69,18 +66,100 @@ header {
   z-index: 3000;
 }
 
-.header-inner {
+/* Contenu principal du header : logo + nom + menu/burger */
+header > .container,
+header .header-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
-/* LOGO */
-.logo {
-  height: 55px;
+/* Bloc logo + texte */
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* MENU BURGER */
+/* Alignement et taille du bloc brand (utilisé dans header.html) */
+header .brand,
+header .brand--header {
+  display: flex;
+  align-items: center; /* texte à droite du logo */
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+header .brand span {
+  font-size: 1rem;     /* même taille que les onglets */
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Légère remontée optionnelle du logo vers le coin supérieur gauche */
+header .brand img {
+  transform: translateY(-4px);
+}
+
+/* Image du logo (marque/brand dans header) */
+header .logo img,
+header .brand img,
+header .brand--header img {
+  height: auto;
+  max-height: 32px;       /* taille réduite demandée */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Texte du nom (Maître Marie Chareyron) */
+header span,
+header strong {
+  color: var(--gold);
+}
+
+header .brand-title,
+header .site-title {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+/* ---------- Menu desktop ---------- */
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav.menu a {
+  color: var(--gold);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+nav.menu a.active {
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ---------- Bouton "Prendre RDV" ---------- */
+
+.btn-header {
+  background: var(--gold);
+  color: var(--brand);
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Burger (mobile) ---------- */
+
 .menu-toggle {
   display: none;
   width: 34px;
@@ -103,58 +182,51 @@ header {
   margin: 6px auto;
 }
 
-/* BUTTON RDV */
-.btn-header {
-  background: var(--gold);
-  color: var(--brand); /* lisible */
-  padding: 8px 18px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  box-shadow: var(--shadow);
-}
+/* ---------- Header : responsive mobile ---------- */
 
-/* MENU DESKTOP */
-nav.menu {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-nav.menu a {
-  color: var(--gold);
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-nav.menu a.active {
-  border-bottom: 2px solid var(--gold);
-}
-
-/* ============================================
-   NAVIGATION MOBILE
-============================================ */
 @media (max-width: 768px) {
 
-  .logo {
-    height: 42px; /* réduction version mobile */
+  header {
+    padding: 8px 0;
   }
 
+  header > .container,
+  header .header-inner {
+    gap: 0.75rem;
+  }
+
+  /* Logo réduit sur mobile */
+  header .logo img,
+  header .brand img,
+  header .brand--header img {
+    height: auto;
+    max-height: 24px;
+  }
+
+  header .brand-title,
+  header .site-title {
+    font-size: 1rem;
+  }
+
+  /* Afficher le burger, masquer le menu inline */
   .menu-toggle {
-    display: block !important;
+    display: block;
+    margin-left: auto;
   }
 
-  /* Cacher le menu desktop */
   nav.menu {
     position: absolute;
-    top: 65px;
+    top: 60px;
     left: 0;
     width: 100%;
     background: var(--brand);
     display: none;
     flex-direction: column;
-    padding: 25px 0;
-    gap: 20px;
+    padding: 20px 0 25px;
+    gap: 18px;
     border-top: 1px solid rgba(255,255,255,0.2);
+    text-align: left;
+    z-index: 2000;
   }
 
   nav.menu.open {
@@ -164,22 +236,88 @@ nav.menu a.active {
   nav.menu a {
     color: var(--gold);
     font-size: 1.2rem;
-    padding: 10px 30px;
+    padding: 8px 30px;
+    display: block;
   }
 
-  .btn-header {
+  /* Bouton RDV en bas du menu mobile */
+  nav.menu .btn-header {
     width: calc(100% - 40px);
     margin: 10px 20px 0;
     text-align: center;
-    color: var(--brand); /* lisible */
-    background: var(--gold);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
-/* ============================================
-   Sections génériques
-============================================ */
+/* ---------- Contraste bouton header (prioritaire) ---------- */
+
+.btn-header,
+a.btn-header,
+nav.menu .btn-header,
+header a.btn-header,
+header button.btn-header {
+  background: var(--gold);
+  color: var(--brand) !important;
+  font-weight: 700;
+  border: 2px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow);
+}
+
+/* Si le bouton "Prendre RDV" est une .btn-primary (dans vos fichiers), cibler explicitement */
+nav.menu a.btn-primary,
+header a.btn-primary {
+  background: var(--gold) !important;
+  color: var(--brand) !important; /* texte bleu sur fond doré */
+  font-weight: 500; /* même poids que les onglets */
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 1rem; /* même taille que les onglets */
+}
+
+/* Assurer le contraste lorsque le bouton est un lien dans le menu */
+nav.menu a.btn-header {
+  color: var(--brand) !important;
+  background: var(--gold);
+}
+
+.btn-header:hover,
+.btn-header:focus {
+  filter: brightness(0.95);
+  text-decoration: none;
+}
+
+/* Header-specific button sizing & explicit color to avoid overrides */
+header .btn-header,
+header a.btn-header,
+header button.btn-header {
+  color: var(--brand) !important;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+/* Forcer couleur bleue sur lien bouton dans menu mobile/desktop */
+nav.menu a.btn-header,
+header a.btn-header {
+  color: var(--brand) !important;
+}
+
+/* Focus visible pour accessibilité */
+.btn-header:focus,
+header a.btn-header:focus {
+  outline: 3px solid rgba(10,35,66,0.12);
+  outline-offset: 2px;
+}
+
+
+
+/* ========================================== 
+   ================ PAGES ===================
+   ========================================== */
+
+/* ---------- Sections génériques ---------- */
+
 .section {
   padding: 60px 0;
 }
@@ -203,9 +341,8 @@ p {
   font-size: 1.1rem;
 }
 
-/* ============================================
-   Boutons généraux
-============================================ */
+/* ---------- Boutons généraux ---------- */
+
 .btn {
   padding: 14px 26px;
   border-radius: var(--radius);
@@ -233,9 +370,8 @@ p {
   color: white;
 }
 
-/* ============================================
-   Cards
-============================================ */
+/* ---------- Cards ---------- */
+
 .card {
   padding: 25px;
   background: white;
@@ -243,26 +379,37 @@ p {
   box-shadow: var(--shadow);
 }
 
-/* ============================================
-   Footer
-============================================ */
-footer {
-  background: var(--brand);
-  color: white;
-  padding: 40px 0;
-  margin-top: 60px;
-  text-align: center;
+/* ---------- Hero home ---------- */
+
+.hero {
+  padding: 60px 0 80px;
 }
 
-footer a {
-  color: var(--gold);
-  font-weight: 500;
+.hero .cta {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-/* ============================================
-   FORMULAIRES
-============================================ */
-form input, form textarea, form select {
+/* ---------- Grilles ---------- */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.features {
+  display: grid;
+  gap: 20px;
+}
+
+/* ---------- Formulaires ---------- */
+
+form input,
+form textarea,
+form select {
   width: 100%;
   padding: 12px;
   margin: 8px 0 14px 0;
@@ -275,36 +422,8 @@ form textarea {
   min-height: 130px;
 }
 
-/* ============================================
-   HERO HOME
-============================================ */
-.hero {
-  padding: 60px 0 80px;
-}
+/* ---------- Responsive PAGES ---------- */
 
-.hero .cta {
-  margin-top: 20px;
-  display: flex;
-  gap: 15px;
-}
-
-/* ============================================
-   GRILLES
-============================================ */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-
-.features {
-  display: grid;
-  gap: 20px;
-}
-
-/* =============================================
-   RESPONSIVE - Grilles
-============================================ */
 @media (max-width: 900px) {
   .grid-2 {
     grid-template-columns: 1fr;
@@ -312,3 +431,20 @@ form textarea {
 }
 
 
+
+/* ========================================== 
+   ================ FOOTER ==================
+   ========================================== */
+
+footer {
+  background: var(--brand);
+  color: white;
+  padding: 40px 0;
+  margin-top: 60px;
+  text-align: center;
+}
+
+footer a {
+  color: var(--gold);
+  font-weight: 500;
+}
